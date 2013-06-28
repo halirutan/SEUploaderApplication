@@ -14,13 +14,13 @@ If[$VersionNumber < 9,
             Print["Error, one of the following already exists. Please remove these files/directories and start again:"];
             Print[zipFile];
             Print[extractedDir];
-            Return[$Failed]
+            Abort[];
         ];
 
         file = URLSave[url, zipFile];
         If[Not[FileExistsQ[file]],
             Print["Couldn't download resource"];
-            Return[$Failed]
+            Abort[];
         ];
         ExtractArchive[file, $TemporaryDirectory];
         CopyDirectory[FileNameJoin[{$TemporaryDirectory, "SEUploaderApplication-master", "SEUploader"}],
