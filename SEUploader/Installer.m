@@ -5,9 +5,19 @@
 If[$VersionNumber < 9,
     Print["This works only in Mathematica version 9"],
 
-    Block[{url, file},
+    Block[{url,
+        zipFile = FileNameJoin[{$TemporaryDirectory, "master.zip"}],
+        extractedDir = FileNameJoin[{$TemporaryDirectory, "SEUploaderApplication-master"}]},
+
         url = "https://github.com/halirutan/SEUploaderApplication/archive/master.zip";
-        file = URLSave[url, FileNameJoin[{$TemporaryDirectory, "master.zip"}]];
+        If[FileExistsQ[zipFile] || DirectoryQ[extractedDir],
+            Print["Error, one of the following already exists. Please remove these files/directories and start again:"];
+            Print[zipFile];
+            Print[extractedDir];
+            Return[$Failed]
+        ];
+
+        file = URLSave[url, zipFile];
         If[Not[FileExistsQ[file]],
             Print["Couldn't download resource"];
             Return[$Failed]
