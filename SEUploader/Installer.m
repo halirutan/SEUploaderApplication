@@ -25,7 +25,7 @@ If[$VersionNumber < 9,
         ExtractArchive[file, $TemporaryDirectory];
         CopyDirectory[FileNameJoin[{$TemporaryDirectory, "SEUploaderApplication-master", "SEUploader"}],
             FileNameJoin[{$UserAddOnsDirectory, "Applications", "SEUploader"}]];
-        DeleteDirectory[FileNameJoin[{$TemporaryDirectory, "SEUploaderApplication-master"}]];
+        DeleteDirectory[FileNameJoin[{$TemporaryDirectory, "SEUploaderApplication-master"}], DeleteContents -> True];
         DeleteFile[file];
         Print["Please restart Mathematica to see the palette in the Palette menu"]
     ]
