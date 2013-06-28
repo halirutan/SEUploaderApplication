@@ -1,6 +1,6 @@
 (* Mathematica Package *)
 (* :Context: SEUploader` *)
-(* :Author: Szabolcs Horvat *)
+(* :Author: Szabolcs Horvat, changed by Patrick Scheibe *)
 (* :Date: 6/27/13 *)
 
 BeginPackage["SEUploader`"]
