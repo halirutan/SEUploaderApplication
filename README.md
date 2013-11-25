@@ -7,8 +7,13 @@ required:
 
 ## Step one
 
-Remove the old palette from your system by searching for it and deleting it. You should be able to find the place of
-the old palette by evaluating
+Remove the old palette from your system by searching for it and deleting it. There are two possibilities: 
+If you already used the *palette application* from this repository, you should delete the directory
+
+      If[DirectoryQ[#], #] &@ FileNameJoin[{$UserAddOnsDirectory, "Applications", "SEUploader"}]
+
+If you think that you still have an installation of the very first (one-palette file) version of the SE Uploader installed
+then you should be able to find the place of this by evaluating
 
        FileNames["*Uploader.nb", $UserBaseDirectory, Infinity]
 
