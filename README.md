@@ -10,12 +10,12 @@ required:
 Remove the old palette from your system by searching for it and deleting it. There are two possibilities: 
 If you already used the *palette application* from this repository, you should delete the directory
 
-      dirname = If[DirectoryQ[#], #] &@ FileNameJoin[{$UserAddOnsDirectory, "Applications", "SEUploader"}]
+    dirname = If[DirectoryQ[#], #] &@ FileNameJoin[{$UserAddOnsDirectory, "Applications", "SEUploader"}]
 
 If you think that you still have an installation of the very first (one-palette file) version of the SE Uploader installed
 then you should be able to find the place of this by evaluating
 
-       file = FileNames["*Uploader.nb", $UserBaseDirectory, Infinity]
+    file = FileNames["*Uploader.nb", $UserBaseDirectory, Infinity]
 
 If either of these two commands result in a directory or a file, you can delete them by calling
 
