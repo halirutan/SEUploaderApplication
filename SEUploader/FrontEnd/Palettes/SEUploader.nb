@@ -1,23 +1,3 @@
-(* Content-type: application/vnd.wolfram.mathematica *)
-
-(*** Wolfram Notebook File ***)
-(* http://www.wolfram.com/nb *)
-
-(* CreatedBy='Mathematica 9.0' *)
-
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       157,          7]
-NotebookDataLength[     26251,        539]
-NotebookOptionsPosition[     25922,        523]
-NotebookOutlinePosition[     26341,        541]
-CellTagsIndexPosition[     26298,        538]
-WindowTitle->SE Uploader
-WindowFrame->Palette*)
-
-(* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[
  DynamicModuleBox[{}, 
@@ -329,32 +309,45 @@ NmQFGBExMpJIIgkvQx2Qldub22JDfuERESMjiSSS8PJ/YOJzPg==
    MessageName[SEUploader`Private`stackImage, "httperr"] = 
     "Server returned respose code: `1`"; 
    MessageName[SEUploader`Private`stackImage, "err"] = 
-    "Server returner error: `1`"; SEUploader`Private`stackImage[
+    "Server returner error: `1`"; 
+   MessageName[SEUploader`Private`stackImage, "parseErr"] = 
+    "Could not parse the answer of the server."; SEUploader`Private`stackImage[
       Pattern[SEUploader`Private`g, 
        Blank[]]] := 
-    Module[{SEUploader`Private`getVal, SEUploader`Private`url, 
-       SEUploader`Private`client, SEUploader`Private`method, 
-       SEUploader`Private`data, SEUploader`Private`partSource, 
-       SEUploader`Private`part, SEUploader`Private`entity, 
-       SEUploader`Private`code, SEUploader`Private`response, 
-       SEUploader`Private`error, SEUploader`Private`result}, 
-      SEUploader`Private`getVal[
-         Pattern[SEUploader`Private`res, 
-          Blank[]], 
-         Pattern[SEUploader`Private`key, 
+    Module[{SEUploader`Private`url, SEUploader`Private`client, 
+       SEUploader`Private`method, SEUploader`Private`data, 
+       SEUploader`Private`partSource, SEUploader`Private`part, 
+       SEUploader`Private`entity, SEUploader`Private`code, 
+       SEUploader`Private`response, SEUploader`Private`error, 
+       SEUploader`Private`result, SEUploader`Private`parseXMLOutput}, 
+      SEUploader`Private`parseXMLOutput[
+         Pattern[SEUploader`Private`str, 
           Blank[String]]] := 
-       With[{SEUploader`Private`k = 
-          StringJoin["var ", SEUploader`Private`key, " = "]}, 
-         StringTrim[
-          First[
-           StringCases[
-            First[
-             Select[SEUploader`Private`res, StringMatchQ[#, 
-               StringExpression[SEUploader`Private`k, 
-                BlankNullSequence[]]]& ]], 
-            StringExpression[SEUploader`Private`k, 
-              Pattern[SEUploader`Private`v, 
-               BlankNullSequence[]], ";"] :> SEUploader`Private`v]], "'"]]; 
+       Block[{SEUploader`Private`xml = 
+          ImportString[SEUploader`Private`str, {"HTML", "XMLObject"}], 
+          SEUploader`Private`result}, SEUploader`Private`result = ReplaceAll[
+            Cases[SEUploader`Private`xml, XMLElement["script", 
+               Blank[], 
+               Pattern[SEUploader`Private`res, 
+                Blank[]]] :> StringTrim[SEUploader`Private`res], 
+             Infinity], {{
+               Pattern[SEUploader`Private`s, 
+                Blank[String]]}} :> SEUploader`Private`s]; If[
+           And[SEUploader`Private`result =!= {}, 
+            StringMatchQ[SEUploader`Private`result, 
+             StringExpression["window.parent", 
+              BlankSequence[]]]], 
+           Flatten[
+            StringCases[
+            SEUploader`Private`result, StringExpression["window.parent.", 
+               Pattern[SEUploader`Private`func, 
+                BlankSequence[]], "(", 
+               Pattern[SEUploader`Private`arg, 
+                BlankSequence[]], ");"] :> {
+               StringMatchQ[SEUploader`Private`func, "closeDialog"], 
+               StringTrim[SEUploader`Private`arg, "\""]}]], $Failed]]; 
+      SEUploader`Private`parseXMLOutput[
+         BlankNullSequence[]] := $Failed; 
       SEUploader`Private`data = ExportString[SEUploader`Private`g, "PNG"]; 
       JLink`JavaBlock[
        JLink`LoadJavaClass[
@@ -364,16 +357,17 @@ NmQFGBExMpJIIgkvQx2Qldub22JDfuERESMjiSSS8PJ/YOJzPg==
            SEUploader`sendImage[
             ToCharacterCode[SEUploader`Private`data]], 
            Return[$Failed]]]; If[SEUploader`Private`response === $Failed, 
-        Return[$Failed]]; SEUploader`Private`response = Map[StringTrim, 
-         StringSplit[SEUploader`Private`response, "\n"]]; 
-      SEUploader`Private`error = 
-       SEUploader`Private`getVal[SEUploader`Private`response, "error"]; 
+        Return[$Failed]]; 
       SEUploader`Private`result = 
-       SEUploader`Private`getVal[SEUploader`Private`response, "result"]; If[
-        StringMatchQ[SEUploader`Private`result, "http*"], 
-        SEUploader`Private`result, Message[
-          MessageName[SEUploader`Private`stackImage, "err"], 
-          SEUploader`Private`error]; $Failed]]; 
+       SEUploader`Private`parseXMLOutput[SEUploader`Private`response]; 
+      If[SEUploader`Private`result =!= $Failed, 
+        If[
+         TrueQ[
+          First[SEUploader`Private`result]], 
+         Last[SEUploader`Private`result], Message[
+           MessageName[SEUploader`Private`stackImage, "err"], 
+           Last[SEUploader`Private`result]]; $Failed], Message[
+          MessageName[SEUploader`Private`stackImage, "parseErr"]]; $Failed]]; 
    SEUploader`Private`copyToClipboard[
       Pattern[SEUploader`Private`text, 
        Blank[]]] := 
@@ -522,27 +516,7 @@ copied to the clipboard.", Bold],
          SEUploader`Private`tag]]]; Null)]]]
 },
 WindowSize->All,
-WindowMargins->{{Automatic, 0}, {Automatic, 0}},
 WindowElements->{},
 WindowTitle->"SE Uploader",
-TaggingRules->{"ImageUploadHistory" -> {}},
-FrontEndVersion->"9.0 for Linux x86 (64-bit) (January 25, 2013)",
 StyleDefinitions->"Palette.nb"
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{}
-*)
-(*CellTagsIndex
-CellTagsIndex->{}
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[583, 21, 25335, 500, 85, InheritFromParent]
-}
-]
-*)
-
-(* End of internal cache information *)
