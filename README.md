@@ -29,12 +29,16 @@ After a restart of *Mathematica* there shouldn't be any SE Uploader entry in the
 
 ## Step two
 
-Evaluate the following
+In **Mathematica version 9** evaluate the following line
 
     Get["http://goo.gl/J7TQO"]
 
-This evaluates the install code under "https://raw.github.com/halirutan/SEUploaderApplication/master/SEUploader/Installer.m"
+This uses the install code under "https://raw.github.com/halirutan/SEUploaderApplication/master/SEUploader/Installer.m"
 and puts the new SEUploader palette application in your local user directory.
+
+For a *Mathematica* version < 9, please download the repository and copy the `SEUploader` directory with content into the following directory
+
+    FileNameJoin[{$UserAddOnsDirectory, "Applications"}]
 
 ## Step three
 
