@@ -218,8 +218,28 @@ NmQFGBExMpJIIgkvQx2Qldub22JDfuERESMjiSSS8PJ/YOJzPg==
          Button["History...", 
           SEUploader`Private`historyButton[], Appearance -> "Palette"], 
          "See previously uploaded images and copy their URLs", TooltipDelay -> 
+         Automatic], 
+        Tooltip[
+         Button[
+         "Copy Code", 
+          Block[{SEUploader`Private`value, SEUploader`Private`string}, 
+            SEUploader`Private`value = NotebookRead[
+               SelectedNotebook[]]; 
+            If[Head[SEUploader`Private`value] === String, 
+              SEUploader`Private`value = Cell[SEUploader`Private`value]]; 
+            If[Head[SEUploader`Private`value] =!= Cell, 
+              SEUploader`Private`value = Cell[
+                BoxData[SEUploader`Private`value]]]; 
+            SEUploader`Private`string = First[
+               MathLink`CallFrontEnd[
+                FrontEnd`ExportPacket[
+                SEUploader`Private`value, "InputText"]]]; 
+            If[Head[SEUploader`Private`string] === String, 
+              SEUploader`Private`copyToClipboard[SEUploader`Private`string], 
+              MessageDialog["Could not copy your selection."]]]; Null], 
+         "Copies the current selection of code to clipboard", TooltipDelay -> 
          Automatic]}]}], StandardForm],
-   ImageSizeCache->{104., {39., 44.}}],
+   ImageSizeCache->{103., {39., 44.}}],
   DynamicModuleValues:>{},
   Initialization:>(Block[{$ContextPath}, 
      Needs["JLink`"]]; JLink`InstallJava[]; 
@@ -371,13 +391,11 @@ NmQFGBExMpJIIgkvQx2Qldub22JDfuERESMjiSSS8PJ/YOJzPg==
    SEUploader`Private`copyToClipboard[
       Pattern[SEUploader`Private`text, 
        Blank[]]] := 
-    Module[{SEUploader`Private`nb}, 
-      SEUploader`Private`nb = NotebookCreate[Visible -> False]; 
-      NotebookWrite[SEUploader`Private`nb, 
-        Cell[SEUploader`Private`text, "Text"]]; 
-      SelectionMove[SEUploader`Private`nb, All, Notebook]; 
-      FrontEndTokenExecute[SEUploader`Private`nb, "Copy"]; 
-      NotebookClose[SEUploader`Private`nb]; Null]; 
+    JLink`JavaBlock[
+     JLink`LoadJavaClass[
+       "de.halirutan.uploader.ClipboardCopy", 
+        SEUploader`Private`StaticsVisible -> True]; 
+      ClipboardCopy`copy[SEUploader`Private`text]]; 
    SEUploader`Private`historyButton[] := CreateDialog[
       Column[{
         Style["Click a thumbnail to copy its URL.", Bold], 
@@ -520,3 +538,4 @@ WindowElements->{},
 WindowTitle->"SE Uploader",
 StyleDefinitions->"Palette.nb"
 ]
+

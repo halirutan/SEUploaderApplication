@@ -21,6 +21,16 @@
     <orderEntry type="library" name="org.apache.httpcomponents:com.springsource.org.apache.httpcomponents.httpcore:4.2.1" level="project" />
     <orderEntry type="library" name="org.apache.httpcomponents:com.springsource.org.apache.httpcomponents.httpclient:4.2.1" level="project" />
     <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.io:2.4" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/junit-4.7.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="junit-4.7" level="project" />
   </component>
 </module>
 

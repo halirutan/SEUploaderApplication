@@ -42,7 +42,26 @@ With[{
 
         Tooltip[
           Button[ "History..." , historyButton[], Appearance -> "Palette"],
-          "See previously uploaded images and copy their URLs" , TooltipDelay -> Automatic]
+          "See previously uploaded images and copy their URLs" , TooltipDelay -> Automatic],
+
+        Tooltip[
+          Button["Copy Code",
+            Block[{value, string},
+
+              value = NotebookRead[SelectedNotebook[]];
+              If[Head[value] === String, value = Cell[value]];
+              If[Head[value] =!= Cell, value = Cell[BoxData[value]]];
+              string = First@MathLink`CallFrontEnd[FrontEnd`ExportPacket[value, "InputText"]];
+              If[Head[string] === String,
+                copyToClipboard[string],
+                MessageDialog["Could not copy your selection."]
+              ]
+            ];
+          ],
+          "Copies the current selection of code to clipboard", TooltipDelay -> Automatic
+
+        ]
+
       (**)
       (*,*)
 
@@ -61,6 +80,9 @@ With[{
         (
           Block[{$ContextPath}, Needs[ "JLink`" ]];
           JLink`InstallJava[];
+
+
+
 
           (* always refers to the palette notebook *)
           pnb = EvaluationNotebook[];
@@ -175,7 +197,7 @@ With[{
                   If[result =!= {} && StringMatchQ[result, "window.parent" ~~ __],
                     Flatten@
                         StringCases[result,
-                          "window.parent." ~~ func__ ~~ "(" ~~ arg__ ~~ ");" :> {StringMatchQ[func,"closeDialog"], StringTrim[arg, "\""]}],
+                          "window.parent." ~~ func__ ~~ "(" ~~ arg__ ~~ ");" :> {StringMatchQ[func, "closeDialog"], StringTrim[arg, "\""]}],
                     $Failed
                   ]
                 ];
@@ -205,6 +227,7 @@ With[{
           (* PALETTE BUTTON ACTIONS AND HELPER FUNCTIONS *)
 
           (* Copy text to the clipboard.  Works on v7. *)
+(*
           copyToClipboard[text_] :=
               Module[{nb},
                 nb = NotebookCreate[Visible -> False];
@@ -213,6 +236,14 @@ With[{
                 FrontEndTokenExecute[nb, "Copy" ];
                 NotebookClose[nb];
               ];
+*)
+
+          copyToClipboard[text_] := JLink`JavaBlock[
+          (* Load the class for copying stuff to clipboard without the clutter *)
+            JLink`LoadJavaClass["de.halirutan.uploader.ClipboardCopy", StaticsVisible -> True];
+            ClipboardCopy`copy[text]
+          ];
+
 
           historyButton[] :=
               CreateDialog[
