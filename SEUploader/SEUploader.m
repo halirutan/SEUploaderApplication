@@ -29,7 +29,7 @@ With[{
           TooltipDelay -> Automatic
         ],
 
-        If[$OperatingSystem === "Windows" || ($OperatingSystem === "MacOSX" && $VersionNumber == 9),
+        If[$OperatingSystem === "Windows" || ($OperatingSystem === "MacOSX" && $VersionNumber >= 9),
 
           Tooltip[
             Button[ "Upload to SE (pp)" ,
