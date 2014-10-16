@@ -1,6 +1,12 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[
- DynamicModuleBox[{}, 
+ DynamicModuleBox[{},
   DynamicBox[ToBoxes[
     Row[{
       Hyperlink[
@@ -195,324 +201,324 @@ U6YX4/lAZwIEDcNd15FEEsnRJ4MdKFbino7b5q1wMXJ38xITG+1BL9iIiJGR
 RBJJeClXUFiJ9mfuq7NrQWuekU8tbYSfzT5nSNgow3DXdSSRRHL0SbkD2p+F
 j052I9Mpcf0OMnLTnPwePUlqP9xyhOGu60giieTok6EKkpUPzF+R3deyQLIx
 NmQFGBExMpJIIgkvQx2Qldub22JDfuERESMjiSSS8PJ/YOJzPg==
-         "], "Byte", 
-         ColorSpace -> "RGB", Interleaving -> True], Pi/2], 
-       "http://mathematica.stackexchange.com/"], 
+         "], "Byte",
+         ColorSpace -> "RGB", Interleaving -> True], Pi/2],
+       "http://mathematica.stackexchange.com/"],
       Column[{
         Tooltip[
-         Button["Upload to SE", 
-          SEUploader`Private`uploadButton[], Appearance -> "Palette"], 
-         "Upload the selected expression as an image to StackExchange", 
-         TooltipDelay -> Automatic], 
+         Button["Upload to SE",
+          SEUploader`Private`uploadButton[], Appearance -> "Palette"],
+         "Upload the selected expression as an image to StackExchange",
+         TooltipDelay -> Automatic],
         If[
-         Or[$OperatingSystem === "Windows", 
-          And[$OperatingSystem === "MacOSX", $VersionNumber == 9]], 
+         Or[$OperatingSystem === "Windows",
+          And[$OperatingSystem === "MacOSX", $VersionNumber >= 9]],
          Tooltip[
-          Button["Upload to SE (pp)", 
-           SEUploader`Private`uploadPPButton[], Appearance -> "Palette"], 
+          Button["Upload to SE (pp)",
+           SEUploader`Private`uploadPPButton[], Appearance -> "Palette"],
           "Upload the selected expression as an image to StackExchange\n\
-(pixel-perfect rasterization)", TooltipDelay -> Automatic], 
+(pixel-perfect rasterization)", TooltipDelay -> Automatic],
          Unevaluated[
-          Sequence[]]], 
+          Sequence[]]],
         Tooltip[
-         Button["History...", 
-          SEUploader`Private`historyButton[], Appearance -> "Palette"], 
-         "See previously uploaded images and copy their URLs", TooltipDelay -> 
+         Button["History...",
+          SEUploader`Private`historyButton[], Appearance -> "Palette"],
+         "See previously uploaded images and copy their URLs", TooltipDelay ->
          Automatic]}]}], StandardForm],
-   ImageSizeCache->{104., {39., 44.}}],
+   ImageSizeCache->{129., {39., 44.}}],
   DynamicModuleValues:>{},
-  Initialization:>(Block[{$ContextPath}, 
-     Needs["JLink`"]]; JLink`InstallJava[]; 
-   SEUploader`Private`pnb = EvaluationNotebook[]; 
-   SEUploader`Private`closeButton[] := DefaultButton["Close", 
-      DialogReturn[], ImageSize -> CurrentValue["DefaultButtonSize"], 
-      ImageMargins -> {{2, 2}, {10, 10}}]; SEUploader`Private`version = 123; 
-   SEUploader`Private`versionURL = 
-    "https://raw.github.com/szhorvat/SEUploader/master/version"; 
-   SEUploader`Private`paletteURL = 
-    "https://raw.github.com/szhorvat/SEUploader/master/SEUploaderLatest.nb"; 
-   SEUploader`Private`checkOnlineVersion[] := 
+  Initialization:>(Block[{$ContextPath},
+     Needs["JLink`"]]; JLink`InstallJava[];
+   SEUploader`Private`pnb = EvaluationNotebook[];
+   SEUploader`Private`closeButton[] := DefaultButton["Close",
+      DialogReturn[], ImageSize -> CurrentValue["DefaultButtonSize"],
+      ImageMargins -> {{2, 2}, {10, 10}}]; SEUploader`Private`version = 123;
+   SEUploader`Private`versionURL =
+    "https://raw.github.com/szhorvat/SEUploader/master/version";
+   SEUploader`Private`paletteURL =
+    "https://raw.github.com/szhorvat/SEUploader/master/SEUploaderLatest.nb";
+   SEUploader`Private`checkOnlineVersion[] :=
     Module[{SEUploader`Private`onlineVersion}, Quiet[
         Check[
-        SEUploader`Private`onlineVersion = 
-         Import[SEUploader`Private`versionURL, "Text"], 
-         Return[$Failed]]]; 
-      CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderLastUpdateCheck"}] = 
-       AbsoluteTime[]; 
-      CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderVersion"}] = 
-       SEUploader`Private`onlineVersion]; 
-   If[AbsoluteTime[] > 
-     3 3600 24 + 
-      CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderLastUpdateCheck"}, 0], 
+        SEUploader`Private`onlineVersion =
+         Import[SEUploader`Private`versionURL, "Text"],
+         Return[$Failed]]];
+      CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderLastUpdateCheck"}] =
+       AbsoluteTime[];
+      CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderVersion"}] =
+       SEUploader`Private`onlineVersion];
+   If[AbsoluteTime[] >
+     3 3600 24 +
+      CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderLastUpdateCheck"}, 0],
      TimeConstrained[
-      SEUploader`Private`checkOnlineVersion[], 6]]; 
-   SEUploader`Private`onlineUpdate[] := 
-    Module[{SEUploader`Private`paletteSource, 
-       SEUploader`Private`paletteExpression, 
-       SEUploader`Private`paletteFileName, 
-       SEUploader`Private`paletteDirectory}, 
-      SEUploader`Private`paletteSource = 
-       Import[SEUploader`Private`paletteURL, "String"]; 
-      If[SEUploader`Private`paletteSource === $Failed, Beep[]; Return[]]; 
+      SEUploader`Private`checkOnlineVersion[], 6]];
+   SEUploader`Private`onlineUpdate[] :=
+    Module[{SEUploader`Private`paletteSource,
+       SEUploader`Private`paletteExpression,
+       SEUploader`Private`paletteFileName,
+       SEUploader`Private`paletteDirectory},
+      SEUploader`Private`paletteSource =
+       Import[SEUploader`Private`paletteURL, "String"];
+      If[SEUploader`Private`paletteSource === $Failed, Beep[]; Return[]];
       Quiet[
         Check[
-        SEUploader`Private`paletteExpression = 
+        SEUploader`Private`paletteExpression =
          ImportString[
-          SEUploader`Private`paletteSource, {"Package", "HeldExpressions"}], 
-         Beep[]; Return[]]]; 
-      If[Extract[SEUploader`Private`paletteExpression, {1, 1, 0}] =!= 
-        Notebook, Beep[]; Return[]]; 
-      SEUploader`Private`paletteFileName = 
-       NotebookFileName[SEUploader`Private`pnb]; 
-      SEUploader`Private`paletteDirectory = 
-       NotebookDirectory[SEUploader`Private`pnb]; 
-      NotebookClose[SEUploader`Private`pnb]; 
-      Export[SEUploader`Private`paletteFileName, 
+          SEUploader`Private`paletteSource, {"Package", "HeldExpressions"}],
+         Beep[]; Return[]]];
+      If[Extract[SEUploader`Private`paletteExpression, {1, 1, 0}] =!=
+        Notebook, Beep[]; Return[]];
+      SEUploader`Private`paletteFileName =
+       NotebookFileName[SEUploader`Private`pnb];
+      SEUploader`Private`paletteDirectory =
+       NotebookDirectory[SEUploader`Private`pnb];
+      NotebookClose[SEUploader`Private`pnb];
+      Export[SEUploader`Private`paletteFileName,
         SEUploader`Private`paletteSource, "String"]; FrontEndExecute[
-        FrontEnd`ResetMenusPacket[{Automatic, Automatic}]]; 
-      FrontEndTokenExecute["OpenFromPalettesMenu", 
-        FileNameTake[SEUploader`Private`paletteFileName]]; Null]; 
-   SEUploader`Private`updateButton[] := 
-    Module[{SEUploader`Private`res}, 
-      SEUploader`Private`res = SEUploader`Private`checkOnlineVersion[]; 
+        FrontEnd`ResetMenusPacket[{Automatic, Automatic}]];
+      FrontEndTokenExecute["OpenFromPalettesMenu",
+        FileNameTake[SEUploader`Private`paletteFileName]]; Null];
+   SEUploader`Private`updateButton[] :=
+    Module[{SEUploader`Private`res},
+      SEUploader`Private`res = SEUploader`Private`checkOnlineVersion[];
       CreateDialog[
         Column[{
-          StringForm["`1`\nInstalled version: `2`\n\n`3`", 
-           If[SEUploader`Private`res =!= $Failed, 
-            StringJoin["Online version: ", 
+          StringForm["`1`\nInstalled version: `2`\n\n`3`",
+           If[SEUploader`Private`res =!= $Failed,
+            StringJoin["Online version: ",
              ToString[
-              CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderVersion"}]]], 
-            "Update check failed.  Please check your internet connection."], 
-           SEUploader`Private`version, 
+              CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderVersion"}]]],
+            "Update check failed.  Please check your internet connection."],
+           SEUploader`Private`version,
            Row[{
              Hyperlink[
-             "Open home page", 
-              "http://meta.mathematica.stackexchange.com/a/32/12"], " | ", 
+             "Open home page",
+              "http://meta.mathematica.stackexchange.com/a/32/12"], " | ",
              Hyperlink[
-             "History of changes", 
-              "https://github.com/szhorvat/SEUploader/commits/master"]}]], 
+             "History of changes",
+              "https://github.com/szhorvat/SEUploader/commits/master"]}]],
           Pane[
            If[
             And[
-            SEUploader`Private`res =!= $Failed, 
-             CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderVersion"}, 
-               SEUploader`Private`version] =!= SEUploader`Private`version, 
+            SEUploader`Private`res =!= $Failed,
+             CurrentValue[$FrontEnd, {TaggingRules, "SEUploaderVersion"},
+               SEUploader`Private`version] =!= SEUploader`Private`version,
              FileNameSplit[
                NotebookDirectory[SEUploader`Private`pnb]] === Join[
                FileNameSplit[$UserBaseDirectory], {
-               "SystemFiles", "FrontEnd", "Palettes"}]], 
-            
+               "SystemFiles", "FrontEnd", "Palettes"}]],
+
             ChoiceButtons[{"Update to new version"}, {
-             SEUploader`Private`onlineUpdate[]; DialogReturn[]}], 
-            SEUploader`Private`closeButton[]], ImageSize -> 340, Alignment -> 
-           Right]}], WindowTitle -> "Version information"]]; 
-   MessageName[SEUploader`Private`stackImage, "httperr"] = 
-    "Server returned respose code: `1`"; 
-   MessageName[SEUploader`Private`stackImage, "err"] = 
-    "Server returner error: `1`"; 
-   MessageName[SEUploader`Private`stackImage, "parseErr"] = 
+             SEUploader`Private`onlineUpdate[]; DialogReturn[]}],
+            SEUploader`Private`closeButton[]], ImageSize -> 340, Alignment ->
+           Right]}], WindowTitle -> "Version information"]];
+   MessageName[SEUploader`Private`stackImage, "httperr"] =
+    "Server returned respose code: `1`";
+   MessageName[SEUploader`Private`stackImage, "err"] =
+    "Server returner error: `1`";
+   MessageName[SEUploader`Private`stackImage, "parseErr"] =
     "Could not parse the answer of the server."; SEUploader`Private`stackImage[
-      Pattern[SEUploader`Private`g, 
-       Blank[]]] := 
-    Module[{SEUploader`Private`url, SEUploader`Private`client, 
-       SEUploader`Private`method, SEUploader`Private`data, 
-       SEUploader`Private`partSource, SEUploader`Private`part, 
-       SEUploader`Private`entity, SEUploader`Private`code, 
-       SEUploader`Private`response, SEUploader`Private`error, 
-       SEUploader`Private`result, SEUploader`Private`parseXMLOutput}, 
+      Pattern[SEUploader`Private`g,
+       Blank[]]] :=
+    Module[{SEUploader`Private`url, SEUploader`Private`client,
+       SEUploader`Private`method, SEUploader`Private`data,
+       SEUploader`Private`partSource, SEUploader`Private`part,
+       SEUploader`Private`entity, SEUploader`Private`code,
+       SEUploader`Private`response, SEUploader`Private`error,
+       SEUploader`Private`result, SEUploader`Private`parseXMLOutput},
       SEUploader`Private`parseXMLOutput[
-         Pattern[SEUploader`Private`str, 
-          Blank[String]]] := 
-       Block[{SEUploader`Private`xml = 
-          ImportString[SEUploader`Private`str, {"HTML", "XMLObject"}], 
+         Pattern[SEUploader`Private`str,
+          Blank[String]]] :=
+       Block[{SEUploader`Private`xml =
+          ImportString[SEUploader`Private`str, {"HTML", "XMLObject"}],
           SEUploader`Private`result}, SEUploader`Private`result = ReplaceAll[
-            Cases[SEUploader`Private`xml, XMLElement["script", 
-               Blank[], 
-               Pattern[SEUploader`Private`res, 
-                Blank[]]] :> StringTrim[SEUploader`Private`res], 
+            Cases[SEUploader`Private`xml, XMLElement["script",
+               Blank[],
+               Pattern[SEUploader`Private`res,
+                Blank[]]] :> StringTrim[SEUploader`Private`res],
              Infinity], {{
-               Pattern[SEUploader`Private`s, 
+               Pattern[SEUploader`Private`s,
                 Blank[String]]}} :> SEUploader`Private`s]; If[
-           And[SEUploader`Private`result =!= {}, 
-            StringMatchQ[SEUploader`Private`result, 
-             StringExpression["window.parent", 
-              BlankSequence[]]]], 
+           And[SEUploader`Private`result =!= {},
+            StringMatchQ[SEUploader`Private`result,
+             StringExpression["window.parent",
+              BlankSequence[]]]],
            Flatten[
             StringCases[
-            SEUploader`Private`result, StringExpression["window.parent.", 
-               Pattern[SEUploader`Private`func, 
-                BlankSequence[]], "(", 
-               Pattern[SEUploader`Private`arg, 
+            SEUploader`Private`result, StringExpression["window.parent.",
+               Pattern[SEUploader`Private`func,
+                BlankSequence[]], "(",
+               Pattern[SEUploader`Private`arg,
                 BlankSequence[]], ");"] :> {
-               StringMatchQ[SEUploader`Private`func, "closeDialog"], 
-               StringTrim[SEUploader`Private`arg, "\""]}]], $Failed]]; 
+               StringMatchQ[SEUploader`Private`func, "closeDialog"],
+               StringTrim[SEUploader`Private`arg, "\""]}]], $Failed]];
       SEUploader`Private`parseXMLOutput[
-         BlankNullSequence[]] := $Failed; 
-      SEUploader`Private`data = ExportString[SEUploader`Private`g, "PNG"]; 
+         BlankNullSequence[]] := $Failed;
+      SEUploader`Private`data = ExportString[SEUploader`Private`g, "PNG"];
       JLink`JavaBlock[
        JLink`LoadJavaClass[
-         "de.halirutan.uploader.SEUploader", 
-          SEUploader`Private`StaticsVisible -> True]; 
+         "de.halirutan.uploader.SEUploader",
+          SEUploader`Private`StaticsVisible -> True];
         SEUploader`Private`response = Check[
            SEUploader`sendImage[
-            ToCharacterCode[SEUploader`Private`data]], 
-           Return[$Failed]]]; If[SEUploader`Private`response === $Failed, 
-        Return[$Failed]]; 
-      SEUploader`Private`result = 
-       SEUploader`Private`parseXMLOutput[SEUploader`Private`response]; 
-      If[SEUploader`Private`result =!= $Failed, 
+            ToCharacterCode[SEUploader`Private`data]],
+           Return[$Failed]]]; If[SEUploader`Private`response === $Failed,
+        Return[$Failed]];
+      SEUploader`Private`result =
+       SEUploader`Private`parseXMLOutput[SEUploader`Private`response];
+      If[SEUploader`Private`result =!= $Failed,
         If[
          TrueQ[
-          First[SEUploader`Private`result]], 
+          First[SEUploader`Private`result]],
          Last[SEUploader`Private`result], Message[
-           MessageName[SEUploader`Private`stackImage, "err"], 
+           MessageName[SEUploader`Private`stackImage, "err"],
            Last[SEUploader`Private`result]]; $Failed], Message[
-          MessageName[SEUploader`Private`stackImage, "parseErr"]]; $Failed]]; 
+          MessageName[SEUploader`Private`stackImage, "parseErr"]]; $Failed]];
    SEUploader`Private`copyToClipboard[
-      Pattern[SEUploader`Private`text, 
-       Blank[]]] := 
-    Module[{SEUploader`Private`nb}, 
-      SEUploader`Private`nb = NotebookCreate[Visible -> False]; 
-      NotebookWrite[SEUploader`Private`nb, 
-        Cell[SEUploader`Private`text, "Text"]]; 
-      SelectionMove[SEUploader`Private`nb, All, Notebook]; 
-      FrontEndTokenExecute[SEUploader`Private`nb, "Copy"]; 
-      NotebookClose[SEUploader`Private`nb]; Null]; 
+      Pattern[SEUploader`Private`text,
+       Blank[]]] :=
+    Module[{SEUploader`Private`nb},
+      SEUploader`Private`nb = NotebookCreate[Visible -> False];
+      NotebookWrite[SEUploader`Private`nb,
+        Cell[SEUploader`Private`text, "Text"]];
+      SelectionMove[SEUploader`Private`nb, All, Notebook];
+      FrontEndTokenExecute[SEUploader`Private`nb, "Copy"];
+      NotebookClose[SEUploader`Private`nb]; Null];
    SEUploader`Private`historyButton[] := CreateDialog[
       Column[{
-        Style["Click a thumbnail to copy its URL.", Bold], 
+        Style["Click a thumbnail to copy its URL.", Bold],
         Dynamic[
          Grid[
           Partition[
            PadRight[
             Apply[Tooltip[
-              
-              Button[#, SEUploader`Private`copyToClipboard[#2]; 
-               DialogReturn[], Appearance -> "Palette"], #2, TooltipDelay -> 
-              Automatic]& , 
+
+              Button[#, SEUploader`Private`copyToClipboard[#2];
+               DialogReturn[], Appearance -> "Palette"], #2, TooltipDelay ->
+              Automatic]& ,
              CurrentValue[
              SEUploader`Private`pnb, {
-              TaggingRules, "ImageUploadHistory"}, {}], {1}], 9, ""], 3]]], 
+              TaggingRules, "ImageUploadHistory"}, {}], {1}], 9, ""], 3]]],
         Item[
          Row[{
-           Spacer[200], 
+           Spacer[200],
            Button[
-           "Clear all", 
+           "Clear all",
             CurrentValue[
              SEUploader`Private`pnb, {
-              TaggingRules, "ImageUploadHistory"}] = {}, ImageSize -> 
-            CurrentValue["DefaultButtonSize"]], 
-           Spacer[10], 
-           SEUploader`Private`closeButton[]}], Alignment -> Right]}], 
-      WindowTitle -> "History"]; 
-   SEUploader`Private`uploadButton[] := 
-    With[{SEUploader`Private`img = SEUploader`Private`rasterizeSelection1[]}, 
-      
-      If[SEUploader`Private`img === $Failed, 
-       Beep[], 
-       SEUploader`Private`uploadWithPreview[SEUploader`Private`img]]]; 
-   SEUploader`Private`uploadPPButton[] := 
-    With[{SEUploader`Private`img = SEUploader`Private`rasterizeSelection2[]}, 
-      
-      If[SEUploader`Private`img === $Failed, 
-       Beep[], 
-       SEUploader`Private`uploadWithPreview[SEUploader`Private`img]]]; 
+              TaggingRules, "ImageUploadHistory"}] = {}, ImageSize ->
+            CurrentValue["DefaultButtonSize"]],
+           Spacer[10],
+           SEUploader`Private`closeButton[]}], Alignment -> Right]}],
+      WindowTitle -> "History"];
+   SEUploader`Private`uploadButton[] :=
+    With[{SEUploader`Private`img = SEUploader`Private`rasterizeSelection1[]},
+
+      If[SEUploader`Private`img === $Failed,
+       Beep[],
+       SEUploader`Private`uploadWithPreview[SEUploader`Private`img]]];
+   SEUploader`Private`uploadPPButton[] :=
+    With[{SEUploader`Private`img = SEUploader`Private`rasterizeSelection2[]},
+
+      If[SEUploader`Private`img === $Failed,
+       Beep[],
+       SEUploader`Private`uploadWithPreview[SEUploader`Private`img]]];
    SEUploader`Private`uploadButtonAction[
-      Pattern[SEUploader`Private`img, 
-       Blank[]]] := 
+      Pattern[SEUploader`Private`img,
+       Blank[]]] :=
     SEUploader`Private`uploadButtonAction[
-     SEUploader`Private`img, "![Mathematica graphics](", ")"]; 
+     SEUploader`Private`img, "![Mathematica graphics](", ")"];
    SEUploader`Private`uploadButtonAction[
-      Pattern[SEUploader`Private`img, 
-       Blank[]], 
-      Pattern[SEUploader`Private`wrapStart, 
-       Blank[String]], 
-      Pattern[SEUploader`Private`wrapEnd, 
-       Blank[String]]] := 
-    Module[{SEUploader`Private`url, SEUploader`Private`markdown}, 
-      Check[SEUploader`Private`url = 
-        SEUploader`Private`stackImage[SEUploader`Private`img], 
-        Return[]]; 
-      SEUploader`Private`markdown = 
+      Pattern[SEUploader`Private`img,
+       Blank[]],
+      Pattern[SEUploader`Private`wrapStart,
+       Blank[String]],
+      Pattern[SEUploader`Private`wrapEnd,
+       Blank[String]]] :=
+    Module[{SEUploader`Private`url, SEUploader`Private`markdown},
+      Check[SEUploader`Private`url =
+        SEUploader`Private`stackImage[SEUploader`Private`img],
+        Return[]];
+      SEUploader`Private`markdown =
        StringJoin[
-        SEUploader`Private`wrapStart, SEUploader`Private`url, 
-         SEUploader`Private`wrapEnd]; 
-      SEUploader`Private`copyToClipboard[SEUploader`Private`markdown]; 
+        SEUploader`Private`wrapStart, SEUploader`Private`url,
+         SEUploader`Private`wrapEnd];
+      SEUploader`Private`copyToClipboard[SEUploader`Private`markdown];
       PrependTo[
         CurrentValue[
         SEUploader`Private`pnb, {TaggingRules, "ImageUploadHistory"}], {
          Thumbnail[
-          Image[SEUploader`Private`img]], SEUploader`Private`url}]; 
+          Image[SEUploader`Private`img]], SEUploader`Private`url}];
       If[Length[
           CurrentValue[
-          SEUploader`Private`pnb, {TaggingRules, "ImageUploadHistory"}]] > 9, 
+          SEUploader`Private`pnb, {TaggingRules, "ImageUploadHistory"}]] > 9,
         CurrentValue[
-         SEUploader`Private`pnb, {TaggingRules, "ImageUploadHistory"}] = 
+         SEUploader`Private`pnb, {TaggingRules, "ImageUploadHistory"}] =
         Most[
           CurrentValue[
-          SEUploader`Private`pnb, {TaggingRules, "ImageUploadHistory"}]]]; 
-      Null]; SEUploader`Private`screenHeight[] := -Apply[Subtract, 
+          SEUploader`Private`pnb, {TaggingRules, "ImageUploadHistory"}]]];
+      Null]; SEUploader`Private`screenHeight[] := -Apply[Subtract,
        Part[
-        ReplaceAll[ScreenRectangle, 
-         Options[$FrontEnd, ScreenRectangle]], 2]]; 
+        ReplaceAll[ScreenRectangle,
+         Options[$FrontEnd, ScreenRectangle]], 2]];
    SEUploader`Private`uploadWithPreview[
-      Pattern[SEUploader`Private`img, 
+      Pattern[SEUploader`Private`img,
        Blank[Image]]] := CreateDialog[
       Column[{
         Style[
         "Upload image to StackExchange network?\nThe URL/MarkDown will be \
-copied to the clipboard.", Bold], 
+copied to the clipboard.", Bold],
         Pane[
-         Image[SEUploader`Private`img, Magnification -> 1], {Automatic, 
+         Image[SEUploader`Private`img, Magnification -> 1], {Automatic,
           Min[SEUploader`Private`screenHeight[] - 140, 1 + Part[
-             ImageDimensions[SEUploader`Private`img], 2]]}, Scrollbars -> 
-         Automatic, AppearanceElements -> {}, ImageMargins -> 0], 
+             ImageDimensions[SEUploader`Private`img], 2]]}, Scrollbars ->
+         Automatic, AppearanceElements -> {}, ImageMargins -> 0],
         Item[
          ChoiceButtons[{"Upload for site", "Upload for chat", "Close"}, {
-          SEUploader`Private`uploadButtonAction[SEUploader`Private`img]; 
-           DialogReturn[], 
+          SEUploader`Private`uploadButtonAction[SEUploader`Private`img];
+           DialogReturn[],
            SEUploader`Private`uploadButtonAction[
-            SEUploader`Private`img, "", ""]; DialogReturn[], 
-           DialogReturn[]}], Alignment -> Right]}], WindowTitle -> 
-      "Upload image to StackExchange?"]; 
+            SEUploader`Private`img, "", ""]; DialogReturn[],
+           DialogReturn[]}], Alignment -> Right]}], WindowTitle ->
+      "Upload image to StackExchange?"];
    SEUploader`Private`rasterizeSelection1[
       Optional[
-       Pattern[SEUploader`Private`maxWidth, 
-        Blank[]], 650]] := 
-    Module[{SEUploader`Private`target, SEUploader`Private`selection, 
-       SEUploader`Private`image}, 
+       Pattern[SEUploader`Private`maxWidth,
+        Blank[]], 650]] :=
+    Module[{SEUploader`Private`target, SEUploader`Private`selection,
+       SEUploader`Private`image},
       SEUploader`Private`selection = NotebookRead[
          SelectedNotebook[]]; If[
         MemberQ[
-         Hold[{}, $Failed, 
-          NotebookRead[$Failed]], SEUploader`Private`selection], $Failed, 
-        SEUploader`Private`target = 
-         CreateDocument[{}, WindowSelected -> False, Visible -> False, 
-           WindowSize -> SEUploader`Private`maxWidth]; 
+         Hold[{}, $Failed,
+          NotebookRead[$Failed]], SEUploader`Private`selection], $Failed,
+        SEUploader`Private`target =
+         CreateDocument[{}, WindowSelected -> False, Visible -> False,
+           WindowSize -> SEUploader`Private`maxWidth];
         NotebookWrite[
-         SEUploader`Private`target, SEUploader`Private`selection]; 
-        SEUploader`Private`image = 
-         Rasterize[SEUploader`Private`target, "Image"]; 
-        NotebookClose[SEUploader`Private`target]; SEUploader`Private`image]]; 
+         SEUploader`Private`target, SEUploader`Private`selection];
+        SEUploader`Private`image =
+         Rasterize[SEUploader`Private`target, "Image"];
+        NotebookClose[SEUploader`Private`target]; SEUploader`Private`image]];
    SEUploader`Private`rasterizeSelection2[] := If[
       MemberQ[
-       Hold[{}, $Failed, 
-        NotebookRead[$Failed]], 
+       Hold[{}, $Failed,
+        NotebookRead[$Failed]],
        NotebookRead[
-        SelectedNotebook[]]], $Failed, 
+        SelectedNotebook[]]], $Failed,
       Module[{SEUploader`Private`tag}, FrontEndExecute[
          FrontEndToken[
-          FrontEnd`SelectedNotebook[], "CopySpecial", 
-          If[$OperatingSystem === "Windows", "MGF", "TIFF"]]]; 
+          FrontEnd`SelectedNotebook[], "CopySpecial",
+          If[$OperatingSystem === "Windows", "MGF", "TIFF"]]];
        Catch[ReplaceAll[
            NotebookGet[
-            ClipboardNotebook[]], Pattern[SEUploader`Private`r, 
-             Blank[RasterBox]] :> Block[{}, 
+            ClipboardNotebook[]], Pattern[SEUploader`Private`r,
+             Blank[RasterBox]] :> Block[{},
              Condition[
               Throw[
                Image[
-                First[SEUploader`Private`r], "Byte", ColorSpace -> "RGB"], 
-               SEUploader`Private`tag], True]]]; $Failed, 
+                First[SEUploader`Private`r], "Byte", ColorSpace -> "RGB"],
+               SEUploader`Private`tag], True]]]; $Failed,
          SEUploader`Private`tag]]]; Null)]]]
 },
 WindowSize->All,
@@ -520,3 +526,6 @@ WindowElements->{},
 WindowTitle->"SE Uploader",
 StyleDefinitions->"Palette.nb"
 ]
+(* End of Notebook Content *)
+
+(* End of internal cache information *)
