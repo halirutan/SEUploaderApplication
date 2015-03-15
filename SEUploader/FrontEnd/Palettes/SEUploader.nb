@@ -524,6 +524,7 @@ copied to the clipboard.", Bold],
 WindowSize->All,
 WindowElements->{},
 WindowTitle->"SE Uploader",
+TaggingRules -> {"ImageUploadHistory" -> {}},
 StyleDefinitions->"Palette.nb"
 ]
 (* End of Notebook Content *)
